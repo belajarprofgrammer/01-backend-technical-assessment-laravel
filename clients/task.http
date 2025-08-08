@@ -1,0 +1,46 @@
+### GET Tasks
+GET http://localhost:8000/api/tasks
+Accept: application/json
+
+### POST Task
+POST http://localhost:8000/api/tasks
+Content-Type: application/json
+Accept: application/json
+
+{
+    "title": "Read a book",
+    "description": "Finish reading the Laravel documentation.",
+    "due_date": "2025-08-10",
+    "is_recurring": false,
+    "recurring_interval": null
+}
+
+### GET Task By ID
+GET http://localhost:8000/api/tasks/12
+Accept: application/json
+
+### PATCH Task
+PATCH http://localhost:8000/api/tasks/12
+Content-Type: application/json
+Accept: application/json
+
+{
+    "title": "Read a book - Updated",
+    "description": "Continue reading the Laravel documentation.",
+    "due_date": "2025-08-10",
+    "is_recurring": true,
+    "recurring_interval": "weekly"
+}
+
+### PATCH Status Task
+PATCH http://localhost:8000/api/tasks/12/status
+Content-Type: application/json
+Accept: application/json
+
+{
+    "status": "completed"
+}
+
+### DELETE Task
+DELETE http://localhost:8000/api/tasks/12
+Accept: application/json
