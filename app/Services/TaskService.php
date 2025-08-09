@@ -10,7 +10,7 @@ interface TaskService
     /**
      * Display a listing of the resource.
      */
-    public function findAll(int $perPage = 10): LengthAwarePaginator;
+    public function findAll(array $data): LengthAwarePaginator;
 
     /**
      * Display the specified resource.

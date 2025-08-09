@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Task;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -18,9 +19,33 @@ class TaskServiceImpl implements TaskService
     /**
      * Display a listing of the resource.
      */
-    public function findAll(int $perPage = 10): LengthAwarePaginator
+    public function findAll(array $data): LengthAwarePaginator
     {
-        return $this->task->paginate($perPage)
+        return $this->task->newQuery()
+            ->when($data['keyword'], function (Builder $query, string $keyword) {
+                $query->whereLike('title', "%{$keyword}%")
+                    ->orWhereLike('description', "%{$keyword}%");
+            })
+            ->when($data['status'], function (Builder $query, string $status) {
+                $query->where('status', '=', $status);
+            })
+            ->when($data['is_recurring'], function (Builder $query, bool $isRecurring) {
+                $query->where('is_recurring', '=', $isRecurring);
+            }, function (Builder $query) use ($data) {
+                if (isset($data['is_recurring'])) {
+                    $query->where('is_recurring', '=', false);
+                }
+            })
+            ->when($data['recurring_interval'], function (Builder $query, string $recurringInterval) {
+                $query->where('recurring_interval', '=', $recurringInterval);
+            })
+            ->when($data['due_date_from'], function (Builder $query, string $dueDateFrom) {
+                $query->whereDate('due_date', '>=', $dueDateFrom);
+            })
+            ->when($data['due_date_to'], function (Builder $query, string $dueDataTo) {
+                $query->whereDate('due_date', '<=', $dueDataTo);
+            })
+            ->paginate($data['per_page'])
             ->withQueryString();
     }
 

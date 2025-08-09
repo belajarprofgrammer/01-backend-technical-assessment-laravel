@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchTaskRequest;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
@@ -23,11 +24,25 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): JsonResponse
+    public function index(SearchTaskRequest $request): JsonResponse
     {
+        $keyword = $request->query('keyword');
+        $status = $request->query('status');
+        $isRecurring = $request->query('is_recurring');
+        $recurringInterval = $request->query('recurring_interval');
+        $dueDateFrom = $request->query('due_date_from');
+        $dueDateTo = $request->query('due_date_to');
         $perPage = $request->query('per_page', 15);
 
-        $tasks = $this->taskService->findAll($perPage);
+        $tasks = $this->taskService->findAll([
+            'keyword' => $keyword,
+            'status' => $status,
+            'is_recurring' => $isRecurring,
+            'recurring_interval' => $recurringInterval,
+            'due_date_from' => $dueDateFrom,
+            'due_date_to' => $dueDateTo,
+            'per_page' => $perPage,
+        ]);
 
         return (new TaskCollection($tasks))
             ->additional([
