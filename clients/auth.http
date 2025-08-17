@@ -1,0 +1,26 @@
+### POST Register
+POST http://localhost:8000/api/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "John Doe",
+    "email": "john.doe@domain.com",
+    "password": "SecurePass123!",
+    "password_confirmation": "SecurePass123!"
+}
+
+### POST Login
+POST http://localhost:8000/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "john.doe@domain.com",
+    "password": "SecurePass123!"
+}
+
+### DELETE Logout
+DELETE http://localhost:8000/api/auth/logout
+Accept: application/json
+Authorization: Bearer 8|xWzB51HtAy5oagkIN9wDdDTHNNBnFJ2N35178Ttrebf9c227

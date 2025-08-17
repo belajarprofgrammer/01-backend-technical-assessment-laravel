@@ -1,0 +1,22 @@
+### GET Profile
+GET http://localhost:8000/api/profile
+Accept: application/json
+Authorization: Bearer 10|bdjQFYnqP3FreoS0CND38CypN22UrNHst3xcfZkw78be1a10
+
+### PATCH Profile
+PATCH http://localhost:8000/api/profile
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer 10|bdjQFYnqP3FreoS0CND38CypN22UrNHst3xcfZkw78be1a10
+
+{
+    "name": "John Smith",
+    "email": "john.doe@domain.com",
+    "password": "SecurePass123!",
+    "password_confirmation": "SecurePass123!"
+}
+
+### DELETE Profile
+DELETE http://localhost:8000/api/profile
+Accept: application/json
+Authorization: Bearer 10|bdjQFYnqP3FreoS0CND38CypN22UrNHst3xcfZkw78be1a10

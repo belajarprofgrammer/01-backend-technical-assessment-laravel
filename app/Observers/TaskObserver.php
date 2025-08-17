@@ -30,6 +30,7 @@ class TaskObserver implements ShouldHandleEventsAfterCommit
             };
 
             Task::create([
+                'user_id' => $task->user_id,
                 'title' => $task->title,
                 'description' => $task->description,
                 'due_date' => $task->due_date,

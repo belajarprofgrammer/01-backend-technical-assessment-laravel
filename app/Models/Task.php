@@ -4,11 +4,15 @@ namespace App\Models;
 
 use App\Enums\RecurringIntervalEnum;
 use App\Enums\StatusEnum;
+use App\Models\Scopes\OwnerScope;
 use App\Observers\TaskObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[ScopedBy(OwnerScope::class)]
 #[ObservedBy(TaskObserver::class)]
 class Task extends Model
 {
@@ -64,6 +68,7 @@ class Task extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'title',
         'description',
         'status',
@@ -85,5 +90,13 @@ class Task extends Model
             'is_recurring' => 'boolean',
             'recurring_interval' => RecurringIntervalEnum::class,
         ];
+    }
+
+    /**
+     * Get the user that owns the task.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

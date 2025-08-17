@@ -63,6 +63,7 @@ class TaskController extends Controller
     public function store(StoreTaskRequest $request): JsonResponse
     {
         $task = new Task;
+        $task->user_id = $request->user()?->id;
         $task->title = $request->input('title');
         $task->description = $request->input('description');
         $task->due_date = $request->input('due_date');

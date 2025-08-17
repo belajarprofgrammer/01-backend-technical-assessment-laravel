@@ -1,11 +1,13 @@
 ### GET Tasks
 GET http://localhost:8000/api/tasks
 Accept: application/json
+Authorization: Bearer 1|pepktzgKNXcpGidr4l2s7SjGX7H0MXPSo91UQCcU40556371
 
 ### POST Task
 POST http://localhost:8000/api/tasks
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer 1|pepktzgKNXcpGidr4l2s7SjGX7H0MXPSo91UQCcU40556371
 
 {
     "title": "Read a book",
@@ -16,13 +18,15 @@ Accept: application/json
 }
 
 ### GET Task
-GET http://localhost:8000/api/tasks/14
+GET http://localhost:8000/api/tasks/11
 Accept: application/json
+Authorization: Bearer 1|pepktzgKNXcpGidr4l2s7SjGX7H0MXPSo91UQCcU40556371
 
 ### PATCH Task
-PATCH http://localhost:8000/api/tasks/14
+PATCH http://localhost:8000/api/tasks/11
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer 1|pepktzgKNXcpGidr4l2s7SjGX7H0MXPSo91UQCcU40556371
 
 {
     "title": "Read a book - Updated",
@@ -33,18 +37,21 @@ Accept: application/json
 }
 
 ### PATCH Status of Task
-PATCH http://localhost:8000/api/tasks/14/status
+PATCH http://localhost:8000/api/tasks/11/status
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer 1|pepktzgKNXcpGidr4l2s7SjGX7H0MXPSo91UQCcU40556371
 
 {
     "status": "completed"
 }
 
 ### DELETE Task
-DELETE http://localhost:8000/api/tasks/14
+DELETE http://localhost:8000/api/tasks/11
 Accept: application/json
+Authorization: Bearer 1|pepktzgKNXcpGidr4l2s7SjGX7H0MXPSo91UQCcU40556371
 
 ### GET Tasks With Filter
 GET http://localhost:8000/api/tasks?due_date_from=2020-01-01&due_date_to=2025-12-12
 Accept: application/json
+Authorization: Bearer 1|pepktzgKNXcpGidr4l2s7SjGX7H0MXPSo91UQCcU40556371
